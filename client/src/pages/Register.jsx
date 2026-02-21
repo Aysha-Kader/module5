@@ -15,7 +15,7 @@ export default function Register() {
     try {
       const res = await axios.post(`${API_URL}/api/auth/register`, form);
       alert(res.data.message);
-      <Link  to="/login"></Link>
+      navigate("/login");
     } catch (err) {
       alert(err.response?.data?.message || err.message);
     }

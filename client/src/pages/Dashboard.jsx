@@ -27,7 +27,7 @@ export default function Dashboard() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-    navigate("/login");
+   navigate ("/login")
   };
 
   useEffect(() => { fetchTasks(); }, []);
