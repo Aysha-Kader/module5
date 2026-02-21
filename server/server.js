@@ -8,7 +8,7 @@ import taskRoutes from "./routes/tasks.js";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({origin:"https://client-crm-beryl.vercel.app/"}));
 app.use(express.json());
 
 // Routes
