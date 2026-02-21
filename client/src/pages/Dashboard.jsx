@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
 import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Dashboard() {
+  const navigate=useNavigate("");
   const [tasks, setTasks] = useState([]);
   const token = localStorage.getItem("token");
 
   const fetchTasks = async () => {
-    if (!token) return window.location.href = "/login";
+    if (!token) return navigate( "/login");
     try {
       const res = await axios.get(`${API_URL}/api/tasks`, {
         headers: { Authorization:`Bearer ${token}` },
@@ -25,7 +27,7 @@ export default function Dashboard() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   useEffect(() => { fetchTasks(); }, []);
