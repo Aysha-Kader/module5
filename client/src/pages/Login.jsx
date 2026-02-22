@@ -1,11 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
-  const navigate=useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,7 +15,7 @@ export default function Login() {
       const res = await axios.post(`${API_URL}/api/auth/login`, form);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", res.data.username);
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (err) {
       alert(err.response?.data?.message || err.message);
     }

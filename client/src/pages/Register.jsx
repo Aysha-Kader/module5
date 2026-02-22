@@ -1,11 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Register() {
-  const navigate=useNavigate();
   const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,7 +14,7 @@ export default function Register() {
     try {
       const res = await axios.post(`${API_URL}/api/auth/register`, form);
       alert(res.data.message);
-      navigate("/login");
+      window.location.href = "/login";
     } catch (err) {
       alert(err.response?.data?.message || err.message);
     }
